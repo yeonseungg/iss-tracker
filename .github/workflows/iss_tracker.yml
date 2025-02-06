@@ -2,7 +2,7 @@ name: Update ISS Location
 
 on:
   schedule:
-    - cron: "*/2 * * * *"  # 2분마다 실행
+    - cron: "*/2 * * * *"  # 6시간마다 실행
   workflow_dispatch:  # 수동 실행 가능
 
 jobs:
@@ -26,6 +26,18 @@ jobs:
 
       - name: Generate ISS location map
         run: python iss_map.py
+
+      - name: List files in repository (debug)
+        run: ls -l  # 📌 파일이 존재하는지 확인
+
+      - name: Check if iss_location.html exists
+        run: |
+          if [ -f "iss_location.html" ]; then
+            echo "✅ iss_location.html 파일이 생성되었습니다."
+          else
+            echo "❌ iss_location.html 파일이 생성되지 않았습니다!"
+            exit 1
+          fi
 
       - name: Commit changes
         run: |
