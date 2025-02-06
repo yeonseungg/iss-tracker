@@ -8,5 +8,5 @@ GitHub Actions를 활용하여 실행되며, GitHub Pages에서 지도 시각화
 📅 업데이트 시간: `2025-02-06 09:03:08 UTC`  
 
 ISS의 현재 위치 업데이트! 🌍
-
+현재는 업데이트 쉬는중...(ノへ￣、)
 [🔗 실시간 ISS 위치 지도 보기](https://yeonseungg.github.io/iss-tracker/iss_location.html)
