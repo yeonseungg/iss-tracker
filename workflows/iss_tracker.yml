@@ -1,0 +1,36 @@
+name: Update ISS Location
+
+on:
+  schedule:
+    - cron: "0 */6 * * *"  # 6시간마다 실행
+  workflow_dispatch:  # 수동 실행 가능
+
+jobs:
+  update-iss:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: pip install requests folium
+
+      - name: Fetch ISS location & Update README
+        run: python iss_tracker.py
+
+      - name: Generate ISS location map
+        run: python iss_map.py
+
+      - name: Commit changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add README.md iss_location.html
+          git commit -m "🚀 Updated ISS Location" || echo "No changes to commit"
+          git push
